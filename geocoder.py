@@ -4,7 +4,6 @@ from geopy import geocoders
 import csv
 import sys
 
-
 def geocode(filename):
     g = geocoders.Google()
     writer = csv.writer(open(filename + ".out", "wb"))
@@ -12,18 +11,19 @@ def geocode(filename):
     try:
         reader = csv.reader(open(filename, "r"))
         for row in reader:
-            username, address, address2, city, state, zip, country = row[0:7]
-            location = address + ', ' + city + ' ' + state + ' ' + zip + ' ' + country
-            try:
-                place, (lat, lng) =  g.geocode(location) # Contact Google for Geocodes
-                la, lo = (lat, lng)
-                x = username, address, address2, city, state, zip, country, la, lo
-                print x
-                writer.writerow(x) #Write out records that now include Geocodes.
-                print "File " + filename + ".out successfully written!"
-            except Exception as e:
-                print "An error has occurred: %s" % e
-                break
+            if row: # Checking to see if it's a valid row so it doesn't blow up on an empty row.
+                username, address, address2, city, state, zip, country = row[0:7]
+                location = address + ', ' + city + ' ' + state + ' ' + zip + ' ' + country
+                try:
+                    place, (lat, lng) =  g.geocode(location) # Contact Google for Geocodes
+                    la, lo = (lat, lng)
+                    x = username, address, address2, city, state, zip, country, la, lo
+                    print x
+                    writer.writerow(x) #Write out records that now include Geocodes.
+                    print "File " + filename + ".out successfully written!"
+                except Exception as e:
+                    print "An error has occurred: %s" % e
+                    break
     except IOError as e:
         print "Unable to open file: %s" % e
 
