@@ -3,6 +3,7 @@
 from geopy import geocoders
 import csv
 import sys
+import time
 
 
 def geocode(filename):
@@ -17,6 +18,7 @@ def geocode(filename):
                 location = address + ', ' + city + ' ' + state + ' ' + zip + ' ' + country
                 try:
                     place, (lat, lng) =  g.geocode(location) # Contact Google for Geocodes
+                    time.sleep(1)
                     la, lo = (lat, lng)
                     x = username, address, address2, city, state, zip, country, la, lo
                     print x
