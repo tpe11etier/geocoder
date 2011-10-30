@@ -5,7 +5,7 @@ import csv
 import sys
 import time
 
-
+ 
 def geocode(filename):
     g = geocoders.Google()
     writer = csv.writer(open(filename + ".out", "wb"))
@@ -18,7 +18,7 @@ def geocode(filename):
                 location = address + ', ' + city + ' ' + state + ' ' + zip + ' ' + country
                 try:
                     place, (lat, lng) =  g.geocode(location) # Contact Google for Geocodes
-                    time.sleep(1)
+                    time.sleep(.05)
                     la, lo = (lat, lng)
                     x = username, address, address2, city, state, zip, country, la, lo
                     print x

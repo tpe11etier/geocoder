@@ -3,7 +3,9 @@
 import random
 import string
 import optparse
+import csv
 from geocoder import geocode
+
 
 
 def generatenames(numtimes, namesfile, addrfile=None):
@@ -47,9 +49,9 @@ def generatenames(numtimes, namesfile, addrfile=None):
 
 def main():
     p = optparse.OptionParser()
-    p.add_option('-x', help='Specify number of random names to generate.', type='int', dest='times')
-    p.add_option('-n', help='Specify filename that contains names.', dest='names')
-    p.add_option('-a', help='Specify filename that contains addresses.', dest='addresses')
+    p.add_option('-x', help='Specify number of random names to generate.', type='int', dest='times', default=None)
+    p.add_option('-n', help='Specify filename that contains names.', dest='names', default=None)
+    p.add_option('-a', help='Specify filename that contains addresses.', dest='addresses',default=None)
     (opts, args) = p.parse_args()
 
     generatenames(opts.times, opts.names, opts.addresses)
