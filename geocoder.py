@@ -5,7 +5,7 @@ import csv
 import sys
 import time
 
-
+ 
 def geocode(filename):
     """
     Geoocder will use geopy and googles API to retrieve geocodes for addresses provided in a properly formatted csv file.
