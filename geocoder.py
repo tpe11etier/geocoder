@@ -7,8 +7,14 @@ import time
 
 
 def geocode(filename):
+    """
+    Geoocder will use geopy and googles API to retrieve geocodes for addresses provided in a properly formatted csv file.
+    An example of a properly formatted entry is:
+    Shompson,13 HORSESHOE RD,, Chelmsford, MA, 01824,USA,,,
+    username,address1,address2,city,state,zip,country,,,
+    """
     g = geocoders.Google()
-    writer = csv.writer(open(filename + ".out", "wb"))
+    writer = csv.writer(open(filename + ".out", "w"))
 
     try:
         reader = csv.reader(open(filename, "r"))
@@ -18,7 +24,7 @@ def geocode(filename):
                 location = address + ', ' + city + ' ' + state + ' ' + zip + ' ' + country
                 try:
                     place, (lat, lng) =  g.geocode(location) # Contact Google for Geocodes
-                    time.sleep(1)
+                    time.sleep(.05)
                     la, lo = (lat, lng)
                     x = username, address, address2, city, state, zip, country, la, lo
                     print x

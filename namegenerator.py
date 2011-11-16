@@ -16,8 +16,8 @@ def generatenames(numtimes, namesfile, addrfile=None):
     members = []
     try:
         infile = open(file, 'r')
-        outfile =  open('geocodes.csv', 'wb')
-        memberfile = open('members.csv', 'wb')
+        outfile =  open('geocodes.csv', 'w')
+        memberfile = open('members.csv', 'w')
         addressfile = open(addrfile, 'r')
 
         for address in addressfile:
@@ -30,8 +30,8 @@ def generatenames(numtimes, namesfile, addrfile=None):
             rnum1 = random.randint(1,len(listofnames)-1)
             rnum2 = random.randint(1,len(listofnames)-1)
             rnum3 = random.randint(1,len(listofaddresses)-1)
-            generatednames.append (listofnames[rnum1][0:1] +  listofnames[rnum2][1:] + ',' + listofaddresses[rnum3])
-            members.append(listofnames[rnum1][0:1] +  listofnames[rnum2][1:] + ',' + listofnames[rnum1] + ',' + listofnames[rnum2] + ',R!chm0nd' + ',True' + ',' + listofnames[rnum1][0:1] + listofnames[rnum2][1:] + '@test.com')
+            generatednames.append (listofnames[rnum1][0:1] +  listofnames[rnum2][:] + ',' + listofaddresses[rnum3])
+            members.append(listofnames[rnum1][0:1] +  listofnames[rnum2][:] + ',' + listofnames[rnum1] + ',' + listofnames[rnum2] + ',R!chm0nd' + ',True' + ',' + listofnames[rnum1][0:1] + listofnames[rnum2][:] + '@test.com')
             tempint += 1
         for name in members:
             print name
@@ -47,7 +47,7 @@ def generatenames(numtimes, namesfile, addrfile=None):
 
 def main():
     p = optparse.OptionParser()
-    p.add_option('-x', help='Specify number of random names to generate.', type='int', dest='times')
+    p.add_option('-x', help='Specify number of random names to generate.', type='int', dest='times', default=None)
     p.add_option('-n', help='Specify filename that contains names.', dest='names')
     p.add_option('-a', help='Specify filename that contains addresses.', dest='addresses')
     (opts, args) = p.parse_args()
