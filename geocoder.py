@@ -5,7 +5,7 @@ import csv
 import sys
 import time
 
- 
+
 def geocode(filename):
     """
     Geoocder will use geopy and googles API to retrieve geocodes for addresses provided in a properly formatted csv file.
@@ -13,8 +13,8 @@ def geocode(filename):
     Shompson,13 HORSESHOE RD,, Chelmsford, MA, 01824,USA,,,
     username,address1,address2,city,state,zip,country,,,
     """
-    g = geocoders.Google()
-    writer = csv.writer(open(filename + ".out", "w"))
+    g = geocoders.GoogleV3()
+    writer = csv.writer(open("%s.out" % filename, "w"))
 
     try:
         reader = csv.reader(open(filename, "r"))
@@ -32,7 +32,7 @@ def geocode(filename):
                 except Exception as e:
                     print "An error has occurred: %s" % e
                     break
-        print "File " + filename + ".out successfully written!"
+        print "File %s.out successfully written!" % filename
     except IOError as e:
         print "Unable to open file: %s" % e
 
